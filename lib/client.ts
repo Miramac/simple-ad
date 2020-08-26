@@ -18,6 +18,10 @@ interface ClientOptions {
 
 type ModifyOperation = 'add' | 'delete'
 
+/**
+ * Creates a new LDAP client
+ * @class Client
+ */
 export class Client {
   url: string
   username: string
@@ -33,6 +37,9 @@ export class Client {
    
   }
 
+  /**
+   * Bind to the LDAP Server
+   */
   bind() {
     return new Promise((resolve, reject) => {
       this.ldapClient = ldap.createClient({
@@ -48,6 +55,9 @@ export class Client {
     })
   }
 
+  /**
+   * Unbind the connection
+   */
   unbind() {
     return new Promise((resolve, reject) => {
       this.ldapClient.unbind((err: Error) => {
@@ -57,6 +67,11 @@ export class Client {
     })
   }
 
+  /**
+   * Perform a LDAP search: http://ldapjs.org/client.html#search
+   * @param dn 
+   * @param options 
+   */
   search(dn: string, options: object)  {
     return new Promise<any[]>(async (resolve, reject) => {
       try {
@@ -99,6 +114,11 @@ export class Client {
     })
   }
 
+  /**
+   * Find Group objects
+   * @param dn 
+   * @param attributes 
+   */
   async findGroup(dn: string, attributes: string[]) {
     
     const opts = {
@@ -109,17 +129,27 @@ export class Client {
     return await this.search(dn, opts)
   }
 
-  async isGroupMember(dn: string, member: string) {
+  /**
+   * Check if entry is member in group
+   * @param groupDN 
+   * @param member 
+   */
+  async isGroupMember(groupDN: string, member: string) {
     const opts = {
       scope: 'sub',
       filter: `(&(objectclass=group)(member=${member}))`,
       attributes: ['cn']
     }
-    const results: any[] = await this.search(dn, opts)
-    return (results.length === 1)
+    const results = await this.search(groupDN, opts)
+    return (results.length > 0)
   }
 
-
+ /**
+  * Add or delete group member
+  * @param groupDN 
+  * @param member 
+  * @param operation 
+  */
   async modifyGroupMember(groupDN: string, member: string | string[], operation: ModifyOperation) {
     member = (!Array.isArray(member)) ? [member] : member
     const change = new ldap.Change({
@@ -149,9 +179,20 @@ export class Client {
     })
   }
 
+  /**
+   * Delete one group member
+   * @param groupDN 
+   * @param member 
+   */
   async addGroupMember(groupDN: string, member: string) {
     return this.modifyGroupMember(groupDN, member,'add')
   }
+
+  /**
+   * Add one group member
+   * @param groupDN 
+   * @param member 
+   */
   async deleteGroupMember(groupDN: string, member: string) {
     // Check is is member in group
      if(await this.isGroupMember(groupDN, member)) {

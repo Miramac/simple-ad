@@ -19,6 +19,10 @@ var _password;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Client = void 0;
 const ldapjs_1 = __importDefault(require("ldapjs"));
+/**
+ * Creates a new LDAP client
+ * @class Client
+ */
 class Client {
     constructor(options) {
         _password.set(this, void 0);
@@ -27,6 +31,9 @@ class Client {
         __classPrivateFieldSet(this, _password, options.password);
         this.baseDN = options.baseDN;
     }
+    /**
+     * Bind to the LDAP Server
+     */
     bind() {
         return new Promise((resolve, reject) => {
             this.ldapClient = ldapjs_1.default.createClient({
@@ -41,6 +48,9 @@ class Client {
             });
         });
     }
+    /**
+     * Unbind the connection
+     */
     unbind() {
         return new Promise((resolve, reject) => {
             this.ldapClient.unbind((err) => {
@@ -50,6 +60,11 @@ class Client {
             });
         });
     }
+    /**
+     * Perform a LDAP search: http://ldapjs.org/client.html#search
+     * @param dn
+     * @param options
+     */
     search(dn, options) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -94,6 +109,11 @@ class Client {
             });
         });
     }
+    /**
+     * Find Group objects
+     * @param dn
+     * @param attributes
+     */
     async findGroup(dn, attributes) {
         const opts = {
             scope: 'sub',
@@ -102,15 +122,26 @@ class Client {
         };
         return await this.search(dn, opts);
     }
-    async isGroupMember(dn, member) {
+    /**
+     * Check if entry is member in group
+     * @param groupDN
+     * @param member
+     */
+    async isGroupMember(groupDN, member) {
         const opts = {
             scope: 'sub',
             filter: `(&(objectclass=group)(member=${member}))`,
             attributes: ['cn']
         };
-        const results = await this.search(dn, opts);
-        return (results.length === 1);
+        const results = await this.search(groupDN, opts);
+        return (results.length > 0);
     }
+    /**
+     * Add or delete group member
+     * @param groupDN
+     * @param member
+     * @param operation
+     */
     async modifyGroupMember(groupDN, member, operation) {
         member = (!Array.isArray(member)) ? [member] : member;
         const change = new ldapjs_1.default.Change({
@@ -140,9 +171,19 @@ class Client {
             });
         });
     }
+    /**
+     * Delete one group member
+     * @param groupDN
+     * @param member
+     */
     async addGroupMember(groupDN, member) {
         return this.modifyGroupMember(groupDN, member, 'add');
     }
+    /**
+     * Add one group member
+     * @param groupDN
+     * @param member
+     */
     async deleteGroupMember(groupDN, member) {
         // Check is is member in group
         if (await this.isGroupMember(groupDN, member)) {
