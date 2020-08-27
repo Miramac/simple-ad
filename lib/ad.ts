@@ -1,8 +1,6 @@
 import ldap from 'ldapjs'
-import { stringify } from 'querystring'
-import { promises } from 'fs'
 
-interface ClientOptions {
+interface ADOptions {
   url: string, // A valid LDAP URL (proto/host/port only)
   // socketPath 	Socket path if using AF_UNIX sockets
   // log 	Bunyan logger instance (Default: built-in instance)
@@ -13,28 +11,27 @@ interface ClientOptions {
   // strictDN 	Force strict DN parsing for client methods (Default is true)
   username: string,
   password: string,
-  baseDN: string
+  clientOptions: ldap.ClientOptions
 }
 
 type ModifyOperation = 'add' | 'delete'
 
 /**
  * Creates a new LDAP client
- * @class Client
+ * @class AD
  */
-export class Client {
+export class AD {
   url: string
   username: string
   #password: string
-  baseDN: string
-  ldapClient: any
+  clientOptions: ldap.ClientOptions
+  client: any
 
-  constructor (options: ClientOptions) {
+  constructor (options: ADOptions) {
     this.url = options.url
     this.username = options.username
     this.#password = options.password
-    this.baseDN = options.baseDN
-   
+    this.clientOptions = options.clientOptions
   }
 
   /**
@@ -42,10 +39,10 @@ export class Client {
    */
   bind() {
     return new Promise((resolve, reject) => {
-      this.ldapClient = ldap.createClient({
+      this.client = ldap.createClient({
         url: this.url
       })
-      this.ldapClient.bind(this.username, this.#password, async (err: Error) => {
+      this.client.bind(this.username, this.#password, async (err: Error) => {
         if (err) {
           await this.unbind()
           return reject(err)
@@ -60,7 +57,7 @@ export class Client {
    */
   unbind() {
     return new Promise((resolve, reject) => {
-      this.ldapClient.unbind((err: Error) => {
+      this.client.unbind((err: Error) => {
         if (err) return reject(err)
         resolve()
       })
@@ -79,7 +76,7 @@ export class Client {
       } catch (e) {
         return reject(e)
       }
-      this.ldapClient.search(dn, options, (err: Error, res: any) => {
+      this.client.search(dn, options, (err: Error, res: any) => {
         if (err) {
           console.log('List groups error:', err)
           return reject(err)
@@ -164,7 +161,7 @@ export class Client {
       } catch (e) {
         return reject(e)
       }
-      this.ldapClient.modify(groupDN, change, async (err: Error) => {
+      this.client.modify(groupDN, change, async (err: Error) => {
         try {
           await this.unbind()
         } catch (e) {
