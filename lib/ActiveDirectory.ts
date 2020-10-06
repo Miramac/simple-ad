@@ -1,6 +1,6 @@
 import ldap from 'ldapjs'
 
-interface ADOptions {
+interface ActiveDirectoryOptions {
   url: string, // A valid LDAP URL (proto/host/port only)
   // socketPath 	Socket path if using AF_UNIX sockets
   // log 	Bunyan logger instance (Default: built-in instance)
@@ -18,16 +18,16 @@ type ModifyOperation = 'add' | 'delete'
 
 /**
  * Creates a new LDAP client
- * @class AD
+ * @class ActiveDirectory
  */
-export class AD {
+export class ActiveDirectory {
   url: string
   username: string
   #password: string
   clientOptions: ldap.ClientOptions
   client: any
 
-  constructor (options: ADOptions) {
+  constructor (options: ActiveDirectoryOptions) {
     this.url = options.url
     this.username = options.username
     this.#password = options.password

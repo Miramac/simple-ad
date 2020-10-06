@@ -1,1 +1,1 @@
-module.exports = require('./dist/ad')
+module.exports = require('./dist/active-directory').ActiveDirectory
