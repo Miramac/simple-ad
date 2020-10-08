@@ -20,7 +20,7 @@ type ModifyOperation = 'add' | 'delete'
  * Creates a new LDAP client
  * @class ActiveDirectory
  */
-export class ActiveDirectory {
+class ActiveDirectory {
   url: string
   username: string
   #password: string
@@ -78,7 +78,6 @@ export class ActiveDirectory {
       }
       this.client.search(dn, options, (err: Error, res: any) => {
         if (err) {
-          console.log('List groups error:', err)
           return reject(err)
         }
         var entries: any[] = []
@@ -116,43 +115,55 @@ export class ActiveDirectory {
    * @param dn 
    * @param attributes 
    */
-  async findGroup(dn: string, attributes: string[]) {
+  async findGroup(groupDN: string, attributes: string[]) {
     
-    const opts = {
+    const options = {
       scope: 'sub',
       filter: '(&(objectclass=group))',
       attributes: attributes
     }
-    return await this.search(dn, opts)
+    const groups = await this.search(groupDN, options)
+    // if attribute 'member' is requested, the function always will return an member array
+    if (attributes.indexOf('member') !== -1) {
+      for (let i = 0; i < groups.length; i++) {
+        if(typeof groups[i].member === 'undefined') {
+          groups[i].member = []
+        } else if(!Array.isArray(groups[i].member)) {
+          groups[i].member = [groups[i].member]
+        }
+      }
+    }
+    // If only one group found, retrun the group object not an array
+    return (groups.length === 1) ? groups[0] : groups
   }
 
   /**
    * Check if entry is member in group
    * @param groupDN 
-   * @param member 
+   * @param memberDN
    */
-  async isGroupMember(groupDN: string, member: string) {
-    const opts = {
+  async isGroupMember(groupDN: string, memberDN: string) {
+    const options = {
       scope: 'sub',
-      filter: `(&(objectclass=group)(member=${member}))`,
+      filter: `(&(objectclass=group)(member=${memberDN}))`,
       attributes: ['cn']
     }
-    const results = await this.search(groupDN, opts)
+    const results = await this.search(groupDN, options)
     return (results.length > 0)
   }
 
  /**
-  * Add or delete group member
+  * Add or delete group members
   * @param groupDN 
-  * @param member 
+  * @param members 
   * @param operation 
   */
-  async modifyGroupMember(groupDN: string, member: string | string[], operation: ModifyOperation) {
-    member = (!Array.isArray(member)) ? [member] : member
+  async modifyGroupMember(groupDN: string, members: string | string[], operation: ModifyOperation) {
+    members = (!Array.isArray(members)) ? [members] : members
     const change = new ldap.Change({
       operation: operation,
       modification: {
-        member: member
+        member: members
       }
     })
     return new Promise(async (resolve, reject) => {
@@ -179,23 +190,26 @@ export class ActiveDirectory {
   /**
    * Delete one group member
    * @param groupDN 
-   * @param member 
+   * @param memberDN 
    */
-  async addGroupMember(groupDN: string, member: string) {
-    return this.modifyGroupMember(groupDN, member,'add')
+  async addGroupMember(groupDN: string, memberDN: string) {
+    return this.modifyGroupMember(groupDN, memberDN,'add')
   }
 
   /**
-   * Add one group member
+   * Remove one group member
    * @param groupDN 
-   * @param member 
+   * @param memberDN
    */
-  async deleteGroupMember(groupDN: string, member: string) {
+  async removeGroupMember(groupDN: string, memberDN: string) {
     // Check is is member in group
-     if(await this.isGroupMember(groupDN, member)) {
-        return this.modifyGroupMember(groupDN, member, 'delete')
+     if(await this.isGroupMember(groupDN, memberDN)) {
+        return this.modifyGroupMember(groupDN, memberDN, 'delete')
      } else {
        return null
      }
   }
 }
+
+
+export = ActiveDirectory
