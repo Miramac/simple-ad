@@ -1,6 +1,6 @@
 {
   "name": "simple-ad",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -13,13 +13,13 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run build",
+    "prepare": "npm run build && npm run typedoc-md",
     "build": "tsc",
     "dev": "tsc --watch ",
     "typedoc-md": "typedoc --plugin typedoc-plugin-markdown ./lib",
     "typedoc": "typedoc ./lib/qualtrics.ts"
   },
-  "keywords": [],
+  "keywords": ["ActiveDirectory", "LDAP", "AD"],
   "author": "miramac",
   "dependencies": {
     "ldapjs": "^2.2.0"

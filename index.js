@@ -1,1 +1,1 @@
-module.exports = require('./dist/active-directory').ActiveDirectory
+module.exports = require('./dist/ActiveDirectory')
