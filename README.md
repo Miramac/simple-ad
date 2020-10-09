@@ -1,6 +1,6 @@
-#simple-ad
+# simple-ad
 
-A basic client read and write wrapper for ldapjs.
+Basic ldapjs wrapper to read and write AD objects.
 
 ````javascript
 const ActiveDirectory = require('simple-ad')
@@ -12,23 +12,24 @@ const config = {
 }
 
 const group = 'CN=MyGroupName,OU=MySubOU,OU=MyOU,DC=example,DC=com'
-const activeDirectory = new ActiveDirectory(config)
-await ad.findGroup(group,
+const ad = new ActiveDirectory(config)
+ad.findGroup(group,
   ['dn', 'cn', 'member']
 ).then(result => {
   console.log(result)
 }).catch(e) {
   // Some error
+  console.error(e)
 }
 
 ````
 
-> findGroup(groupDN)
+> findGroup(groupDN, attributes)
 
->  isGroupMember(groupDN, member)
+> isGroupMember(groupDN, memberDN)
 
->  modifyGroupMember(groupDN, member, operation)
+> modifyGroupMember(groupDN, memberDN, operation)
 
-> addGroupMember(groupDN, member)
+> addGroupMember(groupDN, memberDN)
 
-> deleteGroupMember(groupDN, member)
+> deleteGroupMember(groupDN, memberDN)

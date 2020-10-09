@@ -23,7 +23,7 @@
 
 •  **clientOptions**: ClientOptions
 
-*Defined in ActiveDirectory.ts:14*
+*Defined in [ActiveDirectory.ts:14](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L14)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **password**: string
 
-*Defined in ActiveDirectory.ts:13*
+*Defined in [ActiveDirectory.ts:13](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L13)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **url**: string
 
-*Defined in ActiveDirectory.ts:4*
+*Defined in [ActiveDirectory.ts:4](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L4)*
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 •  **username**: string
 
-*Defined in ActiveDirectory.ts:12*
+*Defined in [ActiveDirectory.ts:12](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L12)*

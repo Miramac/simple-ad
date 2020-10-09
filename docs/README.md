@@ -2,12 +2,12 @@
 
 > [Globals](globals.md)
 
-#simple-ad
+# simple-ad
 
-A basic client read and write wrapper for ldapjs.
+Basic ldapjs wrapper to read and write AD objects.
 
 ````javascript
-const ActiveDirectory = require('simble-ad')
+const ActiveDirectory = require('simple-ad')
 require('dotenv').config()
 const config = {
   url: process.env.LDAP_URL,
@@ -16,14 +16,24 @@ const config = {
 }
 
 const group = 'CN=MyGroupName,OU=MySubOU,OU=MyOU,DC=example,DC=com'
-const activeDirectory = new ActiveDirectory(config)
-await ad.findGroup(group,
+const ad = new ActiveDirectory(config)
+ad.findGroup(group,
   ['dn', 'cn', 'member']
 ).then(result => {
   console.log(result)
 }).catch(e) {
   // Some error
+  console.error(e)
 }
 
 ````
-### findGroup(groupDN)
+
+> findGroup(groupDN, attributes)
+
+> isGroupMember(groupDN, memberDN)
+
+> modifyGroupMember(groupDN, memberDN, operation)
+
+> addGroupMember(groupDN, memberDN)
+
+> deleteGroupMember(groupDN, memberDN)
