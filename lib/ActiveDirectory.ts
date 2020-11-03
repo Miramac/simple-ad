@@ -113,7 +113,7 @@ class ActiveDirectory {
   /**
    * Find Group objects
    * @param dn 
-   * @param attributes 
+   * @param attributes ['cn', 'dn', 'member']
    */
   async findGroup(groupDN: string, attributes: string[]) {
     
@@ -198,16 +198,43 @@ class ActiveDirectory {
 
   /**
    * Remove one group member
-   * @param groupDN 
+   * @param groupDN
    * @param memberDN
    */
-  async removeGroupMember(groupDN: string, memberDN: string) {
+  async deleteGroupMember(groupDN: string, memberDN: string) {
     // Check is is member in group
      if(await this.isGroupMember(groupDN, memberDN)) {
         return this.modifyGroupMember(groupDN, memberDN, 'delete')
      } else {
        return null
      }
+  }
+
+  /**
+   * Find a user objects
+   * @param dn 
+   * @param attributes ['cn', 'dn', 'memberOf']
+   */
+  async findUser(userDN: string, attributes: string[]) {
+    
+    const options = {
+      scope: 'sub',
+      filter: '(&(objectclass=user))',
+      attributes: attributes
+    }
+    const user = await this.search(userDN, options)
+    // if attribute 'member' is requested, the function always will return an member array
+    // if (attributes.indexOf('member') !== -1) {
+    //   for (let i = 0; i < groups.length; i++) {
+    //     if(typeof groups[i].member === 'undefined') {
+    //       groups[i].member = []
+    //     } else if(!Array.isArray(groups[i].member)) {
+    //       groups[i].member = [groups[i].member]
+    //     }
+    //   }
+    // }
+    // If only one group found, retrun the group object not an array
+    return (user.length === 1) ? user[0] : user
   }
 }
 
