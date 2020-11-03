@@ -24,4 +24,4 @@
 
 Ƭ  **ModifyOperation**: \"add\" \| \"delete\"
 
-*Defined in [ActiveDirectory.ts:17](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L17)*
+*Defined in [ActiveDirectory.ts:17](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L17)*

@@ -28,10 +28,10 @@ Creates a new LDAP client
 
 * [addGroupMember](_activedirectory_.activedirectory.md#addgroupmember)
 * [bind](_activedirectory_.activedirectory.md#bind)
+* [deleteGroupMember](_activedirectory_.activedirectory.md#deletegroupmember)
 * [findGroup](_activedirectory_.activedirectory.md#findgroup)
 * [isGroupMember](_activedirectory_.activedirectory.md#isgroupmember)
 * [modifyGroupMember](_activedirectory_.activedirectory.md#modifygroupmember)
-* [removeGroupMember](_activedirectory_.activedirectory.md#removegroupmember)
 * [search](_activedirectory_.activedirectory.md#search)
 * [unbind](_activedirectory_.activedirectory.md#unbind)
 
@@ -41,7 +41,7 @@ Creates a new LDAP client
 
 \+ **new ActiveDirectory**(`options`: [ActiveDirectoryOptions](../interfaces/_activedirectory_.activedirectoryoptions.md)): [ActiveDirectory](_activedirectory_.activedirectory.md)
 
-*Defined in [ActiveDirectory.ts:28](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L28)*
+*Defined in [ActiveDirectory.ts:28](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L28)*
 
 #### Parameters:
 
@@ -57,7 +57,7 @@ Name | Type |
 
 • `Private` **#password**: string
 
-*Defined in [ActiveDirectory.ts:26](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L26)*
+*Defined in [ActiveDirectory.ts:26](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L26)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 •  **client**: any
 
-*Defined in [ActiveDirectory.ts:28](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L28)*
+*Defined in [ActiveDirectory.ts:28](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L28)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 •  **clientOptions**: ClientOptions
 
-*Defined in [ActiveDirectory.ts:27](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L27)*
+*Defined in [ActiveDirectory.ts:27](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L27)*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 •  **url**: string
 
-*Defined in [ActiveDirectory.ts:24](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L24)*
+*Defined in [ActiveDirectory.ts:24](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L24)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 •  **username**: string
 
-*Defined in [ActiveDirectory.ts:25](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L25)*
+*Defined in [ActiveDirectory.ts:25](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L25)*
 
 ## Methods
 
@@ -97,7 +97,7 @@ ___
 
 ▸ **addGroupMember**(`groupDN`: string, `memberDN`: string): Promise\<unknown>
 
-*Defined in [ActiveDirectory.ts:195](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L195)*
+*Defined in [ActiveDirectory.ts:195](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L195)*
 
 Delete one group member
 
@@ -116,9 +116,28 @@ ___
 
 ▸ **bind**(): Promise\<unknown>
 
-*Defined in [ActiveDirectory.ts:40](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L40)*
+*Defined in [ActiveDirectory.ts:40](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L40)*
 
 Bind to the LDAP Server
+
+**Returns:** Promise\<unknown>
+
+___
+
+### deleteGroupMember
+
+▸ **deleteGroupMember**(`groupDN`: string, `memberDN`: string): Promise\<unknown>
+
+*Defined in [ActiveDirectory.ts:204](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L204)*
+
+Remove one group member
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`groupDN` | string |  |
+`memberDN` | string |   |
 
 **Returns:** Promise\<unknown>
 
@@ -128,7 +147,7 @@ ___
 
 ▸ **findGroup**(`groupDN`: string, `attributes`: string[]): Promise\<any>
 
-*Defined in [ActiveDirectory.ts:118](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L118)*
+*Defined in [ActiveDirectory.ts:118](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L118)*
 
 Find Group objects
 
@@ -147,7 +166,7 @@ ___
 
 ▸ **isGroupMember**(`groupDN`: string, `memberDN`: string): Promise\<boolean>
 
-*Defined in [ActiveDirectory.ts:145](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L145)*
+*Defined in [ActiveDirectory.ts:145](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L145)*
 
 Check if entry is member in group
 
@@ -166,7 +185,7 @@ ___
 
 ▸ **modifyGroupMember**(`groupDN`: string, `members`: string \| string[], `operation`: [ModifyOperation](../modules/_activedirectory_.md#modifyoperation)): Promise\<unknown>
 
-*Defined in [ActiveDirectory.ts:161](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L161)*
+*Defined in [ActiveDirectory.ts:161](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L161)*
 
 Add or delete group members
 
@@ -182,30 +201,11 @@ Name | Type | Description |
 
 ___
 
-### removeGroupMember
-
-▸ **removeGroupMember**(`groupDN`: string, `memberDN`: string): Promise\<unknown>
-
-*Defined in [ActiveDirectory.ts:204](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L204)*
-
-Remove one group member
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`groupDN` | string |  |
-`memberDN` | string |   |
-
-**Returns:** Promise\<unknown>
-
-___
-
 ### search
 
 ▸ **search**(`dn`: string, `options`: object): Promise\<any[]>
 
-*Defined in [ActiveDirectory.ts:72](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L72)*
+*Defined in [ActiveDirectory.ts:72](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L72)*
 
 Perform a LDAP search: http://ldapjs.org/client.html#search
 
@@ -224,7 +224,7 @@ ___
 
 ▸ **unbind**(): Promise\<unknown>
 
-*Defined in [ActiveDirectory.ts:58](https://github.com/Miramac/simple-ad/blob/085658f/lib/ActiveDirectory.ts#L58)*
+*Defined in [ActiveDirectory.ts:58](https://github.com/Miramac/simple-ad/blob/bad7525/lib/ActiveDirectory.ts#L58)*
 
 Unbind the connection
 
