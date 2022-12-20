@@ -16,8 +16,7 @@
     "prepare": "npm run build && npm run typedoc-md",
     "build": "tsc",
     "dev": "tsc --watch ",
-    "typedoc-md": "typedoc --plugin typedoc-plugin-markdown ./lib",
-    "typedoc": "typedoc ./lib/qualtrics.ts"
+    "typedoc-md": "typedoc --plugin typedoc-plugin-markdown ./lib/*"
   },
   "keywords": [
     "ActiveDirectory",
@@ -31,9 +30,9 @@
   "devDependencies": {
     "@types/ldapjs": "^1.0.9",
     "@types/node": "^14.14.6",
-    "dotenv": "^8.2.0",
-    "typedoc": "^0.19.2",
+    "dotenv": "^8.6.0",
+    "typedoc": "^0.23.23",
     "typedoc-plugin-markdown": "^3.0.11",
-    "typescript": "^4.0.5"
+    "typescript": "^4.9.4"
   }
 }
