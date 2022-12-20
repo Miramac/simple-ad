@@ -1,6 +1,6 @@
 # simple-ad
 
-Basic ldapjs wrapper to read and write AD objects. Currently only finding and editing group members is implemented.
+Basic ldapjs wrapper for reading and writing AD objects. Currently only searching and editing of group members is implemented.
 
 ````javascript
 const ActiveDirectory = require('simple-ad')
