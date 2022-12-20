@@ -1,12 +1,16 @@
 import ldap from 'ldapjs'
 
+/**
+ * ActiveDirectory LDAP Options
+ * @typedef {Object} ActiveDirectoryOptions - LDAP Options
+ */
 interface ActiveDirectoryOptions {
   url: string, // A valid LDAP URL (proto/host/port only)
   // socketPath 	Socket path if using AF_UNIX sockets
   // log 	Bunyan logger instance (Default: built-in instance)
   // timeout 	Milliseconds client should let operations live for before timing out (Default: Infinity)
   // connectTimeout 	Milliseconds client should wait before timing out on TCP connections (Default: OS default)
-  // tlsOptions 	Additional options passed to TLS connection layer when connecting via ldaps:// (See: The TLS docs for node.js)
+  tlsOptions: Object, //	Additional options passed to TLS connection layer when connecting via ldaps:// (See: The TLS docs for node.js)
   // idleTimeout 	Milliseconds after last activity before client emits idle event
   // strictDN 	Force strict DN parsing for client methods (Default is true)
   username: string,
@@ -14,6 +18,10 @@ interface ActiveDirectoryOptions {
   clientOptions: ldap.ClientOptions
 }
 
+/**
+ * Group modify operations
+ * @type {('add'|'delete')}  Available modify operations
+ */
 type ModifyOperation = 'add' | 'delete'
 
 /**
@@ -22,6 +30,7 @@ type ModifyOperation = 'add' | 'delete'
  */
 class ActiveDirectory {
   url: string
+  tlsOptions: Object
   username: string
   #password: string
   clientOptions: ldap.ClientOptions
@@ -29,6 +38,7 @@ class ActiveDirectory {
 
   constructor (options: ActiveDirectoryOptions) {
     this.url = options.url
+    this.tlsOptions = options.tlsOptions
     this.username = options.username
     this.#password = options.password
     this.clientOptions = options.clientOptions
@@ -38,9 +48,10 @@ class ActiveDirectory {
    * Bind to the LDAP Server
    */
   bind() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.client = ldap.createClient({
-        url: this.url
+        url: this.url,
+        tlsOptions: this.tlsOptions
       })
       this.client.bind(this.username, this.#password, async (err: Error) => {
         if (err) {
@@ -56,7 +67,7 @@ class ActiveDirectory {
    * Unbind the connection
    */
   unbind() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.client.unbind((err: Error) => {
         if (err) return reject(err)
         resolve()
@@ -166,7 +177,7 @@ class ActiveDirectory {
         member: members
       }
     })
-    return new Promise(async (resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
       try {
         await this.bind()
       } catch (e) {
