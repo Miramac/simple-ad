@@ -28,7 +28,7 @@ type ModifyOperation = 'add' | 'delete'
  * Creates a new LDAP client
  * @class ActiveDirectory
  */
-class ActiveDirectory {
+export default class ActiveDirectory {
   url: string
   tlsOptions: Object
   username: string
@@ -121,9 +121,11 @@ class ActiveDirectory {
     })
   }
 
+
+  
   /**
    * Find Group objects
-   * @param dn 
+   * @param dn
    * @param attributes ['cn', 'dn', 'member']
    */
   async findGroup(groupDN: string, attributes: string[]) {
@@ -248,6 +250,3 @@ class ActiveDirectory {
     return (user.length === 1) ? user[0] : user
   }
 }
-
-
-export = ActiveDirectory
