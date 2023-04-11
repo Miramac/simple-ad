@@ -55,7 +55,6 @@ export default class ActiveDirectory {
       })
       this.client.bind(this.username, this.#password, async (err: Error) => {
         if (err) {
-          await this.unbind()
           return reject(err)
         }
         resolve()
