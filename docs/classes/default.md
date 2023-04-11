@@ -1,6 +1,6 @@
-[simple-ad](../README.md) / [Exports](../modules.md) / export=
+[simple-ad](../README.md) / [Exports](../modules.md) / default
 
-# Class: export=
+# Class: default
 
 Creates a new LDAP client
 
@@ -8,34 +8,34 @@ Creates a new LDAP client
 
 ### Constructors
 
-- [constructor](export_.md#constructor)
+- [constructor](default.md#constructor)
 
 ### Properties
 
-- [#password](export_.md##password)
-- [client](export_.md#client)
-- [clientOptions](export_.md#clientoptions)
-- [tlsOptions](export_.md#tlsoptions)
-- [url](export_.md#url)
-- [username](export_.md#username)
+- [#password](default.md##password)
+- [client](default.md#client)
+- [clientOptions](default.md#clientoptions)
+- [tlsOptions](default.md#tlsoptions)
+- [url](default.md#url)
+- [username](default.md#username)
 
 ### Methods
 
-- [addGroupMember](export_.md#addgroupmember)
-- [bind](export_.md#bind)
-- [deleteGroupMember](export_.md#deletegroupmember)
-- [findGroup](export_.md#findgroup)
-- [findUser](export_.md#finduser)
-- [isGroupMember](export_.md#isgroupmember)
-- [modifyGroupMember](export_.md#modifygroupmember)
-- [search](export_.md#search)
-- [unbind](export_.md#unbind)
+- [addGroupMember](default.md#addgroupmember)
+- [bind](default.md#bind)
+- [deleteGroupMember](default.md#deletegroupmember)
+- [findGroup](default.md#findgroup)
+- [findUser](default.md#finduser)
+- [isGroupMember](default.md#isgroupmember)
+- [modifyGroupMember](default.md#modifygroupmember)
+- [search](default.md#search)
+- [unbind](default.md#unbind)
 
 ## Constructors
 
 ### constructor
 
-• **new export=**(`options`)
+• **new default**(`options`)
 
 #### Parameters
 
@@ -45,7 +45,7 @@ Creates a new LDAP client
 
 #### Defined in
 
-[ActiveDirectory.ts:39](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L39)
+[ActiveDirectory.ts:39](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L39)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Creates a new LDAP client
 
 #### Defined in
 
-[ActiveDirectory.ts:35](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L35)
+[ActiveDirectory.ts:35](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L35)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[ActiveDirectory.ts:37](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L37)
+[ActiveDirectory.ts:37](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L37)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[ActiveDirectory.ts:36](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L36)
+[ActiveDirectory.ts:36](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L36)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[ActiveDirectory.ts:33](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L33)
+[ActiveDirectory.ts:33](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L33)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[ActiveDirectory.ts:32](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L32)
+[ActiveDirectory.ts:32](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L32)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 #### Defined in
 
-[ActiveDirectory.ts:34](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L34)
+[ActiveDirectory.ts:34](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L34)
 
 ## Methods
 
@@ -128,7 +128,7 @@ Delete one group member
 
 #### Defined in
 
-[ActiveDirectory.ts:206](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L206)
+[ActiveDirectory.ts:207](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L207)
 
 ___
 
@@ -144,7 +144,7 @@ Bind to the LDAP Server
 
 #### Defined in
 
-[ActiveDirectory.ts:50](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L50)
+[ActiveDirectory.ts:50](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L50)
 
 ___
 
@@ -167,7 +167,7 @@ Remove one group member
 
 #### Defined in
 
-[ActiveDirectory.ts:215](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L215)
+[ActiveDirectory.ts:216](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L216)
 
 ___
 
@@ -190,7 +190,7 @@ Find Group objects
 
 #### Defined in
 
-[ActiveDirectory.ts:129](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L129)
+[ActiveDirectory.ts:130](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L130)
 
 ___
 
@@ -213,7 +213,7 @@ Find a user objects
 
 #### Defined in
 
-[ActiveDirectory.ts:229](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L229)
+[ActiveDirectory.ts:230](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L230)
 
 ___
 
@@ -236,7 +236,7 @@ Check if entry is member in group
 
 #### Defined in
 
-[ActiveDirectory.ts:156](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L156)
+[ActiveDirectory.ts:157](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L157)
 
 ___
 
@@ -260,7 +260,7 @@ Add or delete group members
 
 #### Defined in
 
-[ActiveDirectory.ts:172](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L172)
+[ActiveDirectory.ts:173](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L173)
 
 ___
 
@@ -283,7 +283,7 @@ Perform a LDAP search: http://ldapjs.org/client.html#search
 
 #### Defined in
 
-[ActiveDirectory.ts:83](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L83)
+[ActiveDirectory.ts:82](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L82)
 
 ___
 
@@ -299,4 +299,4 @@ Unbind the connection
 
 #### Defined in
 
-[ActiveDirectory.ts:69](https://github.com/Miramac/simple-ad/blob/5f8fb63/lib/ActiveDirectory.ts#L69)
+[ActiveDirectory.ts:68](https://github.com/Miramac/simple-ad/blob/9855696/lib/ActiveDirectory.ts#L68)
