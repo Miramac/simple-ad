@@ -53,10 +53,11 @@ export default class ActiveDirectory {
         url: this.url,
         tlsOptions: this.tlsOptions
       })
-      this.client.bind(this.username, this.#password, async (err: Error) => {
-        if (err) {
-          return reject(err)
-        }
+      this.client.on('error', (err: Error) => {
+        reject(err)
+      })
+      this.client.bind(this.username, this.#password, (err: Error, res: any) => {
+        if (err) return reject(err)
         resolve()
       })
     })
@@ -82,7 +83,7 @@ export default class ActiveDirectory {
   search(dn: string, options: object)  {
     return new Promise<any[]>(async (resolve, reject) => {
       try {
-        await this.bind()
+        const x = await this.bind()
       } catch (e) {
         return reject(e)
       }
